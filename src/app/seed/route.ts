@@ -1,10 +1,10 @@
-import { db } from '@vercel/postgres'
-import { users } from '../lib/databaseSeed'
+import { db } from '@vercel/postgres';
+import { users } from '../lib/databaseSeed';
 
 const client = await db.connect();
 
 async function seedUsers() {
-  await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`
+  await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
   await client.sql`
      CREATE TABLE IF NOT EXISTS users (
        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -24,7 +24,7 @@ async function seedUsers() {
     }),
   );
 
-  return insertedUsers
+  return insertedUsers;
 }
 
 export async function GET() {
