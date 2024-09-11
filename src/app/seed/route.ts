@@ -1,5 +1,5 @@
 import { db } from "@vercel/postgres";
-import { users } from './databaseSeed';
+import { users } from '../lib/databaseSeed';
 
 const client = await db.connect();
 
