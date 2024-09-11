@@ -2,7 +2,6 @@ import { createUser, State } from '../lib/actions'
 import { useState } from 'react'
 
 const Loginform = () => {
- 
   const [state, setState] = useState<State>({ message: null, errors: {} })
 
   const [loading, setLoading] = useState(false)
@@ -21,8 +20,8 @@ const Loginform = () => {
     }
     setLoading(false)
   }
-//console.log(state)
-//console.log(loading)
+  console.log(state)
+  console.log(loading)
   return (
     <div className="flex items-center justify-center h-screen mt-[-100px] pt-0">
       <form onSubmit={handleSubmit} className="">
