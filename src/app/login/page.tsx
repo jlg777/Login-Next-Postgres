@@ -1,7 +1,6 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import Loginform from '../ui/Loginform'
 
 
 const Page = () => {
@@ -9,7 +8,7 @@ const Page = () => {
   return (
     <>
       <p>La ruta actual es: {pathname}</p>
-      <Loginform />
+   
     </>
   )
 }

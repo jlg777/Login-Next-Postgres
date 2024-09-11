@@ -1,17 +1,8 @@
-import { usePathname } from 'next/navigation'
 import { createUser, State } from '../lib/actions'
 import { useState } from 'react'
 
 const Loginform = () => {
-  const pathname = usePathname()
-
-  const message =
-    pathname === '/login'
-      ? 'Favor ingrese para continuar.'
-      : pathname === '/register'
-      ? 'Favor registrese para continuar.'
-      : ''
-
+ 
   const [state, setState] = useState<State>({ message: null, errors: {} })
 
   const [loading, setLoading] = useState(false)
@@ -36,7 +27,7 @@ console.log(loading)
     <div className="flex items-center justify-center h-screen mt-[-100px] pt-0">
       <form onSubmit={handleSubmit} className="">
         <div className="flex-1 rounded-lg px-6 pb-4 pt-0">
-          <h1 className={`mb-3 text-2xl`}>{message}</h1>
+          <h1 className={`mb-3 text-2xl`}>Favor registrese para continuar</h1>
           <div className="w-fit grid gap-2">
             <div className="relative">
               <label className="mb-3 mt-5 block text-m font-medium text-white-800" htmlFor="user">
@@ -74,7 +65,7 @@ console.log(loading)
               className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
               aria-disabled={true}
             >
-              {pathname === '/login' ? 'Iniciar sesión' : 'Registrarse'}
+              Registrarse
             </button>
           </div>
         </div>

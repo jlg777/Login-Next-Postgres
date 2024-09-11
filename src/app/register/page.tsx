@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import Loginform from '../ui/Loginform'
+import Loginform from '../ui/Registerform'
 
 
 const Page = () => {
