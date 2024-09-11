@@ -18,7 +18,7 @@ async function seedUsers() {
       //const hashedPassword = await bcrypt.hash(user.password, 10);
       return client.sql`
          INSERT INTO users (id, user, password)
-         VALUES (${user.id}, ${user.user}, ${user.password})
+         VALUES (${user.id}, ${user.user}, password)
          ON CONFLICT (id) DO NOTHING;
        `;
     }),
@@ -27,11 +27,14 @@ async function seedUsers() {
   return insertedUsers;
 }
 
+
+
 export async function GET() {
-  try {
+    try {
     await client.sql`BEGIN`;
     await seedUsers();
     await client.sql`COMMIT`;
+
     return Response.json({ message: 'Database seeded successfully' });
   } catch (error) {
     await client.sql`ROLLBACK`;
