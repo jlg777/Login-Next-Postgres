@@ -34,12 +34,14 @@ export async function createUser (formData: FormData) {
     if (!validatedFields.success) {
         return {
           errors: validatedFields.error.flatten().fieldErrors,
-          message: 'Missing Fields. Failed to Create Invoice.',
+          message: 'Missing Fields. Failed to Create User.',
         };
       }
     
       const { user, password } = validatedFields.data;
       const id = uuidv4();  // Generar un nuevo UUID para el id del usuario
+      
+      
       try {
         await sql`
           INSERT INTO users (id, user, password)
@@ -47,7 +49,7 @@ export async function createUser (formData: FormData) {
         `;
       } catch (error) {
         return {
-          message: 'Database Error: Failed to Create Invoice.',
+          message: 'Database Error: Failed to Create User.',
         };
       }
   
