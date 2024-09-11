@@ -1,5 +1,6 @@
-import { createUser } from '@/actions'
 import { usePathname } from 'next/navigation'
+import { createUser, State } from '../lib/actions'
+import { useActionState, useState } from 'react'
 
 const Loginform = () => {
   const pathname = usePathname()
@@ -11,11 +12,28 @@ const Loginform = () => {
       ? 'Favor registrese para continuar.'
       : ''
 
-      
-     
+  const [state, setState] = useState<State>({ message: null, errors: {} })
+
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setLoading(true)
+
+    const formData = new FormData(event.currentTarget)
+    const result = await createUser(formData)
+
+    if (result.errors) {
+      setState({ errors: result.errors, message: result.message || null })
+    } else {
+      setState({ errors: {}, message: result.message || null })
+    }
+    setLoading(false)
+  }
+console.log(state)
   return (
     <div className="flex items-center justify-center h-screen mt-[-100px] pt-0">
-      <form action={createUser} className="">
+      <form onSubmit={handleSubmit} className="">
         <div className="flex-1 rounded-lg px-6 pb-4 pt-0">
           <h1 className={`mb-3 text-2xl`}>{message}</h1>
           <div className="w-fit grid gap-2">

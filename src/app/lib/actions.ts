@@ -25,7 +25,7 @@ export type State = {
 const CreateUser = FormSchema.omit({ id: true});
 
 // La función para crear un usuario, utilizando el formulario de datos
-export async function createUser (prevState: State, formData: FormData) {
+export async function createUser (formData: FormData) {
     const validatedFields = CreateUser.safeParse({
         user: formData.get('user'),
         password: formData.get('password'),
