@@ -3,8 +3,8 @@
 import { usePathname } from 'next/navigation'
 import Loginform from '../ui/Loginform'
 
-type Props = {}
-const Page = (props: Props) => {
+
+const Page = () => {
   const pathname = usePathname()
   return (
     <>

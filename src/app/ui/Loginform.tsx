@@ -1,6 +1,6 @@
 import { usePathname } from 'next/navigation'
 import { createUser, State } from '../lib/actions'
-import { useActionState, useState } from 'react'
+import { useState } from 'react'
 
 const Loginform = () => {
   const pathname = usePathname()
@@ -31,6 +31,7 @@ const Loginform = () => {
     setLoading(false)
   }
 console.log(state)
+console.log(loading)
   return (
     <div className="flex items-center justify-center h-screen mt-[-100px] pt-0">
       <form onSubmit={handleSubmit} className="">

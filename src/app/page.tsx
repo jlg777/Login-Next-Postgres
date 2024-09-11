@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation"
 
-type Props = {}
-const page = (props: Props) => {
+
+const page = () => {
   const pathname = usePathname()
   return (
     <>
