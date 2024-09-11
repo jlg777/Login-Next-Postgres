@@ -17,7 +17,7 @@ async function seedUsers() {
     users.map(async (user) => {
       //const hashedPassword = await bcrypt.hash(user.password, 10);
       return client.sql`
-         INSERT INTO users (id, name, email, password)
+         INSERT INTO users (id, email, password)
          VALUES (${user.id}, ${user.email}, ${user.password})
          ON CONFLICT (id) DO NOTHING;
        `;
