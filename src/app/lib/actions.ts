@@ -40,20 +40,20 @@ export async function createUser(formData: FormData) {
   //console.log(validatedFields.data)
   const { email, password } = validatedFields.data;
   const id = uuidv4();  // Generar un nuevo UUID para el id del usuario
-  console.log(id)
-  console.log(validatedFields.data)
+  console.log(typeof(id))
+  console.log(typeof(email))
+  console.log(typeof(password))
   try {
     await sql`
-  INSERT INTO users (id, email, password)
-  VALUES (${id}, ${email}, ${password})
-  ON CONFLICT (id) DO NOTHING;
+  INSERT INTO users (email, password)
+  VALUES (${email}, ${password})
 `;
-
 //redirect('/');
     return {
       message: 'User created successfully',
     };
   } catch (error) {
+    console.error('Database Error:', error); // Agregar detalles del error
     return {
       message: 'Database Error: Failed to Create User.',
     };
