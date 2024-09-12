@@ -46,7 +46,7 @@ export async function createUser(formData: FormData) {
   try {
     await sql`
   INSERT INTO users (email, password)
-  VALUES (${email}, ${password})
+  VALUES ('jorge@prhueba.com', '123456')
 `;
 //redirect('/');
     return {
