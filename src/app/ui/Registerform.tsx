@@ -29,15 +29,15 @@ const Loginform = () => {
           <h1 className={`mb-3 text-2xl`}>Favor registrese para continuar</h1>
           <div className="w-fit grid gap-2">
             <div className="relative">
-              <label className="mb-3 mt-5 block text-m font-medium text-white-800" htmlFor="user">
+              <label className="mb-3 mt-5 block text-m font-medium text-white-800" htmlFor="email">
                 Usuario
               </label>
               <div>
                 <input
                   className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 text-gray-900 placeholder:text-gray-500"
-                  id="user"
+                  id="email"
                   type="email"
-                  name="user"
+                  name="email"
                   placeholder="ingrese su email"
                   required
                 />
