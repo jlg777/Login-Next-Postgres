@@ -44,7 +44,7 @@ const Loginform = () => {
               </div>
             </div>
             <div className="mt-0">
-              <label className="mb-3 mt-5 block text-m font-medium text-white-800" htmlFor="">
+              <label className="mb-3 mt-5 block text-m font-medium text-white-800" htmlFor="password">
                 Contraseña
               </label>
               <div className="relative">

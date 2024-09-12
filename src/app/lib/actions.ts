@@ -41,15 +41,15 @@ export async function createUser(formData: FormData) {
   //console.log(validatedFields.data)
   const { email, password } = validatedFields.data;
   const id = uuidv4();  // Generar un nuevo UUID para el id del usuario
-  console.log(typeof(id))
+  console.log(id)
   console.log(typeof(email))
   console.log(typeof(password))
   try {
     await sql`
   INSERT INTO users (email, password)
-  VALUES ('jorge@prhueba.com', '123456')
+  VALUES (${email}, ${password})
 `;
-//redirect('/');
+    //redirect('/');
     return {
       message: 'User created successfully',
     };
