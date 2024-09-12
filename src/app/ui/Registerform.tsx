@@ -1,9 +1,9 @@
+import { redirect } from 'next/navigation'
 import { createUser, State } from '../lib/actions'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Loginform = () => {
   const [state, setState] = useState<State>({ message: null, errors: {} })
-
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -12,16 +12,18 @@ const Loginform = () => {
 
     const formData = new FormData(event.currentTarget)
     const result = await createUser(formData)
-
-    if (result.errors) {
-      setState({ errors: result.errors, message: result.message || null })
-    } else {
-      setState({ errors: {}, message: result.message || null })
-    }
+    setState({ errors: result.errors || {}, message: result.message || null })
     setLoading(false)
+
   }
-  console.log(state)
-  console.log(loading)
+
+  useEffect(() => {
+    if (state.message === 'User created successfully') {
+      redirect('/success?message=User created successfully')
+    }
+  }, [state.message])
+  //console.log(state)
+  //console.log(loading)
   return (
     <div className="flex items-center justify-center h-screen mt-[-100px] pt-0">
       <form onSubmit={handleSubmit} className="">
@@ -41,6 +43,8 @@ const Loginform = () => {
                   placeholder="ingrese su email"
                   required
                 />
+                {state && <p className="text-red-500">{state.errors?.email}</p>}
+
               </div>
             </div>
             <div className="mt-0">
@@ -57,17 +61,19 @@ const Loginform = () => {
                   //minLength={6}
                   required
                 />
+                {state && <p className="text-red-500">{state.errors?.password}</p>}
               </div>
             </div>
             <button
               type="submit"
               className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-              aria-disabled={true}
+
             >
-              Registrarse
+              {loading ? 'Registrando...' : 'Registrarse'}
             </button>
           </div>
         </div>
+
       </form>
     </div>
   )
