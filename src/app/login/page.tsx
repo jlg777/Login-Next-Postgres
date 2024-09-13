@@ -1,6 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import LoginForm from '../ui/LoginForm'
 
 
 const Page = () => {
@@ -8,7 +9,7 @@ const Page = () => {
   return (
     <>
       <p>La ruta actual es: {pathname}</p>
-   
+      <LoginForm />
     </>
   )
 }
