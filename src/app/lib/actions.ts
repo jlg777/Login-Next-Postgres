@@ -3,6 +3,8 @@ import { sql } from '@vercel/postgres';
 //import { revalidatePath } from 'next/cache';
 //import { redirect } from 'next/navigation';
 import { z } from 'zod';
+import bcrypt from 'bcrypt';
+
 
 
 // Define el esquema de validación
@@ -39,11 +41,12 @@ export async function createUser(formData: FormData) {
   }
   //console.log(validatedFields.data)
   const { email, password } = validatedFields.data;
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
     await sql`
       INSERT INTO users (email, password)
-      VALUES (${email}, ${password})
+      VALUES (${email}, ${hashedPassword})
     `;
     // Redirigir después de la operación exitosa
      
