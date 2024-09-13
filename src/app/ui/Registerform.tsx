@@ -12,10 +12,11 @@ const Loginform = () => {
 
     const formData = new FormData(event.currentTarget)
     const result = await createUser(formData)
-    setState({ errors: result.errors || {}, message: result.message || null })
-    setLoading(false)
-
-  }
+    if (result.errors || result.message){}
+    setState({ errors: result.errors || {}, message: result.message  })
+    setLoading(false)}
+    
+  
 
   useEffect(() => {
     if (state.message === 'User created successfully') {

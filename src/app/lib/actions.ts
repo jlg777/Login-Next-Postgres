@@ -1,7 +1,7 @@
 'use server';
 import { sql } from '@vercel/postgres';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
+//import { revalidatePath } from 'next/cache';
+//import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
 
@@ -42,10 +42,13 @@ export async function createUser(formData: FormData) {
 
   try {
     await sql`
-  INSERT INTO users (email, password)
-  VALUES (${email}, ${password})
-`;
+      INSERT INTO users (email, password)
+      VALUES (${email}, ${password})
+    `;
+    // Redirigir después de la operación exitosa
+     
     return {
+      errors:{},
       message: 'User created successfully',
     };
 
@@ -60,6 +63,6 @@ export async function createUser(formData: FormData) {
 
   //revalidatePath('/dashboard/invoices');
 
-  revalidatePath('/');
-  redirect('/');
+  //revalidatePath('/');
+  //redirect('/');
 };
