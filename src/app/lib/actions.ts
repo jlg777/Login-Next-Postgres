@@ -48,8 +48,7 @@ export async function createUser(formData: FormData) {
     // Redirigir después de la operación exitosa
      
     return {
-      errors:{},
-      message: 'User created successfully',
+       message: 'User created successfully',
     };
 
   } catch (error) {
