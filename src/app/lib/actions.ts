@@ -27,13 +27,11 @@ export type State = {
 const CreateUser = FormSchema.omit({ id: true });
 
 // La función para crear un usuario, utilizando el formulario de datos
-export async function createUser(prevState: State, formData: FormData): Promise<State> {
+export async function createUser(formData: FormData) {
   const validatedFields = CreateUser.safeParse({
-    email: formData.get('email')  as string | null,
-    password: formData.get('password')  as string | null,
+    email: formData.get('email'),
+    password: formData.get('password'),
   });
-
-console.log(validatedFields)
 
   if (!validatedFields.success) {
     return {
@@ -52,7 +50,7 @@ console.log(validatedFields)
     `;
     // Redirigir después de la operación exitosa
      
-     return {
+    return {
        message: 'User created successfully',
     };
 
