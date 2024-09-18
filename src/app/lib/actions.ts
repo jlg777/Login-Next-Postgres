@@ -4,6 +4,8 @@ import { sql } from '@vercel/postgres';
 //import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
+import { signIn } from '../../../auth';
+import { AuthError } from 'next-auth';
 
 
 
@@ -68,3 +70,23 @@ export async function createUser(formData: FormData) {
   //revalidatePath('/');
   //redirect('/');
 };
+
+export async function authenticate(
+   formData: FormData,
+) {
+    try {
+      const result = await signIn('credentials', formData);
+      console.log('Resultado de signIn:', result);
+    } catch (error) {
+      if (error instanceof AuthError) {
+        switch (error.type) {
+          case 'CredentialsSignin':
+            return {message: 'Invalid credentials.'}
+          default:
+            return {message: 'Something went wrong.'}
+        }
+      }
+      throw error;
+    }
+    
+  }
