@@ -1,8 +1,26 @@
+"use client"
+import { useActionState, useState } from "react";
+import { authenticate, State } from "../lib/actions";
 
 const LoginForm = () => {
+  const [state, setState] = useState<State>({})
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setLoading(true)
+
+    const formData = new FormData(event.currentTarget)
+    const result = await authenticate(formData)
+    console.log(result)
+   /* if (result) { }
+    setState({ errors: { general: result.error } });
+    setLoading(false)*/
+  }
+
   return (
     <div className="flex items-center justify-center h-screen mt-[-100px] pt-0">
-    <form  className="">
+    <form  className="" onSubmit={handleSubmit}>
       <div className="flex-1 rounded-lg px-6 pb-4 pt-0">
         <h1 className={`mb-3 text-2xl`}>Favor registrese para continuar</h1>
         <div className="w-fit grid gap-2">
@@ -40,9 +58,10 @@ const LoginForm = () => {
           </div>
           <button
             type="submit"
+            disabled={loading}  
             className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
           >
-            Ingresar
+             {loading ? 'Cargando...' : 'Ingresar'}
           </button>
         </div>
       </div>
