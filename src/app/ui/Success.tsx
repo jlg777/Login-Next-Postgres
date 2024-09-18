@@ -1,18 +1,22 @@
 "use client";
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import Router from 'next/router';
+//import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 export default function SuccessPage() {
   const searchParams = useSearchParams();
+  //const router = useRouter(); // Usar useRouter
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const messageParam = searchParams.get('message');
     if (messageParam) {
       setMessage(messageParam);
-    } else (Router.push('/'))
+    } else {
+      // Redirección alternativa
+      window.location.href = '/';
+    }
   }, [searchParams]);
 
   return (<>
